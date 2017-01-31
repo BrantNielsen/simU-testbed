@@ -33,13 +33,17 @@ class Parameter(models.Model):
         (CHECKBOX, 'Checkbox')
     )
 
+    class Meta:
+        ordering = ['display_order']
+
     package = models.ForeignKey('Package', on_delete=models.CASCADE)
-    parent_option = models.ForeignKey('Option', on_delete=models.CASCADE, related_name='parent_option')
+    parent_option = models.ForeignKey('Option', on_delete=models.CASCADE, related_name='parent_option', null=True)
+    label = models.CharField(max_length=100)
     name = models.CharField(max_length=50)
 
     type = models.CharField(max_length=3, choices=TYPE_CHOICES)
 
-    required = models.BooleanField()
+    required = models.BooleanField(default=False)
     help = models.CharField(max_length=300, null=True, blank=True)
     display_order = models.IntegerField()
 
@@ -47,6 +51,21 @@ class Parameter(models.Model):
 
     min_value = models.FloatField(null=True)
     max_value = models.FloatField(null=True)
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'parent_option_id': self.parent_option_id,
+            'label': self.label,
+            'name': self.name,
+            'type': self.type,
+            'required': self.required,
+            'help': self.help,
+            'display_order': self.display_order,
+            'default_value': self.default_value,
+            'min_value': self.min_value,
+            'max_value': self.max_value
+        }
 
 
 class Option(models.Model):

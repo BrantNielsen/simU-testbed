@@ -1,0 +1,22 @@
+{%  extends 'base.html' %}
+
+{%  block content %}
+    <p>Hello Everyone :D!</p>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Input</div>
+        <div class="panel-body">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var parameters = {{ parameter_json|safe }};
+    </script>
+{% endblock %}
+
+{% block scripts %}
+    <p>In the second one</p>
+{% endblock %}
