@@ -15,10 +15,10 @@ turbulence_p.save()'''
 
 from website.models import Package, Parameter
 
-turbulence_p = Package.objects.get(id='c93f8227-4230-44f7-924b-2338454be100')
+turbulence_p = Package.objects.get(id='4a3cd725-d660-4ac1-9dd6-4a394acb911a')
 
-'''box_size = Parameter(package=turbulence_p, label='Box Size', name='boxsize', type=Parameter.FLOAT, required=True, display_order=1, default_value=str(0.565487))
-box_size.save()'''
+box_size = Parameter(package=turbulence_p, label='Box Size', name='boxsize', type=Parameter.FLOAT, required=True, display_order=1, default_value=str(0.565487))
+box_size.save()
 
 num_modes = Parameter(package=turbulence_p, label='Number of Modes', name='nummodes', type=Parameter.INTEGER, required=True, display_order=2, default_value=str(100))
 num_modes.save()

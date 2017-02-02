@@ -1,6 +1,16 @@
 {%  extends 'base.html' %}
 
 {%  block content %}
+    <script>
+        var parameters = {{ parameter_json|safe }};
+
+        require(["jquery"], function($) {
+            $(document).ready(function () {
+               alert("This ran!");
+            });
+        })
+    </script>
+
     <p>Hello Everyone :D!</p>
 
     <div class="panel panel-default">
@@ -9,14 +19,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block scripts %}
-    <script type="text/javascript">
-        var parameters = {{ parameter_json|safe }};
-    </script>
-{% endblock %}
-
-{% block scripts %}
-    <p>In the second one</p>
 {% endblock %}

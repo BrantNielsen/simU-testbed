@@ -6,6 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+
+        <script src="{% static "js/lib/require.js" %}"></script>
+        <script>
+            function extless(input) {
+                return input.replace(/(.*)\.[^.]+$/, '$1');
+            }
+            requirejs.config({
+                paths: {
+                    "jquery": extless("{% static 'js/lib/jquery.js' %}")
+                }
+            });
+        </script>
     </head>
     <body>
         {% include "includes/header.html" %}
@@ -13,11 +25,6 @@
         <div class="container">
             {% block content %}{% endblock %}
         </div>
-
-        <script src="{% static "js/lib/require.js" %}"></script>
-        <script src="{% static "js/require-config.js" %}"></script>
-
-        {% if scripts %}
 
         {% block scripts %}{% endblock %}
         {% block body_extra %}{% endblock body_extra %}
