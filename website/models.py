@@ -52,6 +52,14 @@ class Parameter(models.Model):
     min_value = models.FloatField(null=True)
     max_value = models.FloatField(null=True)
 
+    @staticmethod
+    def type_abbreviations():
+        rv = {}
+        for type_choice in Parameter.TYPE_CHOICES:
+            rv[type_choice[0]] = type_choice[1]
+
+        return rv
+
     def as_dict(self):
         return {
             'id': self.id,
@@ -66,7 +74,6 @@ class Parameter(models.Model):
             'min_value': self.min_value,
             'max_value': self.max_value
         }
-
 
 class Option(models.Model):
     parameter = models.ForeignKey('Parameter', on_delete=models.CASCADE)

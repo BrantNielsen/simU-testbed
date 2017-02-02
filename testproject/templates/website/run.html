@@ -1,22 +1,27 @@
 {%  extends 'base.html' %}
+{%  load staticfiles %}
 
 {%  block content %}
     <script>
         var parameters = {{ parameter_json|safe }};
 
-        require(["jquery"], function($) {
+        var parameterTypeAbbreviations = {{ parameter_type_abbreviations_json|safe }};
+
+        /*require(["jquery"], function($) {
             $(document).ready(function () {
                alert("This ran!");
             });
-        })
+        });*/
     </script>
-
-    <p>Hello Everyone :D!</p>
 
     <div class="panel panel-default">
         <div class="panel-heading">Input</div>
         <div class="panel-body">
+            <form id="jsInputForm" action="{% url 'website:run-process' package_id=package_id %}">
 
+            </form>
         </div>
     </div>
+
+    <script src="{% static "js/pages/run.js" %}"></script>
 {% endblock %}

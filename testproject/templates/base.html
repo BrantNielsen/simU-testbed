@@ -1,4 +1,4 @@
-{% load staticfiles %}<!DOCTYPE html>
+{% load staticfiles website_extras %}<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -9,12 +9,12 @@
 
         <script src="{% static "js/lib/require.js" %}"></script>
         <script>
-            function extless(input) {
-                return input.replace(/(.*)\.[^.]+$/, '$1');
-            }
+            var staticUrl = "{% static_url %}";
+
             requirejs.config({
+                baseUrl: staticUrl + "js",
                 paths: {
-                    "jquery": extless("{% static 'js/lib/jquery.js' %}")
+                    "jquery": "lib/jquery"
                 }
             });
         </script>
@@ -22,11 +22,12 @@
     <body>
         {% include "includes/header.html" %}
 
+        <p>{{ STATIC_URL }}</p>
+
         <div class="container">
             {% block content %}{% endblock %}
         </div>
 
-        {% block scripts %}{% endblock %}
         {% block body_extra %}{% endblock body_extra %}
 
     </body>
