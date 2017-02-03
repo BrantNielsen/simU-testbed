@@ -88,6 +88,7 @@ class Option(models.Model):
 
     def as_dict(self):
         return {
+            'id': self.id,
             'parameter_id': self.parameter_id,
             'value': self.value,
             'label': self.label,

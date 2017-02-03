@@ -20,12 +20,17 @@ define(["jquery"], function(jQuery) {
         console.dir(InputForm.parameterTypeAbbreviations);
 
         var parameterIdIndex = {};
-        for (var parameter in data) {
+        var optionIdIndex = {};
+
+        for (var parameter in parameters) {
             parameterIdIndex[parameter.id] = parameter;
         }
 
         for (var option in options) {
+            optionIdIndex[option.id] = option;
+
             var parameter = parameterIdIndex[option.parameter_id];
+
 
             if (typeof parameter === "undefined") {
                 console.log("ERROR: Parameter with id '" + option.parameter_id + "' not found.");
@@ -33,6 +38,10 @@ define(["jquery"], function(jQuery) {
                 parameter.options = parameter.options || [];
                 parameter.options.push(option);
             }
+        }
+
+        for (var parameter in data) {
+
         }
 
 

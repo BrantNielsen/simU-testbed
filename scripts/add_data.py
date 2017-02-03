@@ -15,7 +15,8 @@ turbulence_p.save()'''
 
 from website.models import Package, Parameter, Option
 
-turbulence_p = Package.objects.get(id='4a3cd725-d660-4ac1-9dd6-4a394acb911a')
+# turbulence_p = Package.objects.get(id='4a3cd725-d660-4ac1-9dd6-4a394acb911a')
+turbulence_p = Package.objects.get(id='c93f8227-4230-44f7-924b-2338454be100')
 
 '''box_size = Parameter(package=turbulence_p, label='Box Size', name='boxsize', type=Parameter.FLOAT, required=True, display_order=1, default_value=str(0.565487))
 box_size.save()
@@ -30,10 +31,10 @@ deterministic = Parameter(package=turbulence_p, label='Deterministic', name='det
 deterministic.save()'''
 
 deterministic = Parameter.objects.get(name='deterministic')
-'''deterministic.label = None
+deterministic.label = None
 deterministic.save()
 
-print(deterministic)'''
+print(deterministic)
 
 deterministic_option = Option(parameter=deterministic, label='Deterministic', value=True, display_order=1, is_default=True)
 deterministic_option.save()
