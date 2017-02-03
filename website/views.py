@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
-from .models import Package, Parameter
+from .models import Package, Parameter, Option
 import uuid
 import json
 
@@ -12,8 +12,16 @@ def run(request, package_id):
         raise Http404("Package ID is not valid")
 
     package = get_object_or_404(Package, pk=package_id)
-    parameter_dicts = [param.as_dict() for param in package.parameter_set.all()]
+
+    parameters = package.parameter_set.all()
+
+    parameter_dicts = [param.as_dict() for param in parameters]
     parameter_json = json.dumps({'data': parameter_dicts}, sort_keys=True)
+
+    parameter_options = Option.objects.filter(parameter__in=parameters)
+
+    parameter_option_dicts = [option.as_dict() for option in parameter_options]
+    parameter_option_json = json.dumps({'data': parameter_option_dicts}, sort_keys=True)
 
     parameter_type_abbreviations_json = json.dumps(Parameter.type_abbreviations())
 
@@ -21,6 +29,7 @@ def run(request, package_id):
         'package': package,
         'parameter_json': parameter_json,
         'parameter_type_abbreviations_json': parameter_type_abbreviations_json,
+        'parameter_options_json': parameter_option_json,
         'package_id': package_id
     })
 

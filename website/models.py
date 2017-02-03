@@ -38,7 +38,7 @@ class Parameter(models.Model):
 
     package = models.ForeignKey('Package', on_delete=models.CASCADE)
     parent_option = models.ForeignKey('Option', on_delete=models.CASCADE, related_name='parent_option', null=True)
-    label = models.CharField(max_length=100)
+    label = models.CharField(max_length=100, null=True)  # Options like checkboxes can have null (no) labels
     name = models.CharField(max_length=50)
 
     type = models.CharField(max_length=3, choices=TYPE_CHOICES)
@@ -75,10 +75,25 @@ class Parameter(models.Model):
             'max_value': self.max_value
         }
 
+
 class Option(models.Model):
+    class Meta:
+        ordering = ['display_order']
+
     parameter = models.ForeignKey('Parameter', on_delete=models.CASCADE)
     value = models.CharField(max_length=50)
     label = models.CharField(max_length=100)
+    display_order = models.IntegerField()
+    is_default = models.BooleanField(default=False)
+
+    def as_dict(self):
+        return {
+            'parameter_id': self.parameter_id,
+            'value': self.value,
+            'label': self.label,
+            'display_order': self.display_order,
+            'is_default': self.is_default
+        }
 
 
 class Run(models.Model):

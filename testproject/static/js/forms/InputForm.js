@@ -15,9 +15,27 @@ define(["jquery"], function(jQuery) {
     InputForm.knownParameterTypes.RADIO = "radio";
     InputForm.knownParameterTypes.CHECKBOX = "checkbox";
 
-    InputForm.buildForm = function($form, parameters) {
+    InputForm.buildForm = function($form, parameters, options) {
         console.dir(parameters);
         console.dir(InputForm.parameterTypeAbbreviations);
+
+        var parameterIdIndex = {};
+        for (var parameter in data) {
+            parameterIdIndex[parameter.id] = parameter;
+        }
+
+        for (var option in options) {
+            var parameter = parameterIdIndex[option.parameter_id];
+
+            if (typeof parameter === "undefined") {
+                console.log("ERROR: Parameter with id '" + option.parameter_id + "' not found.");
+            } else {
+                parameter.options = parameter.options || [];
+                parameter.options.push(option);
+            }
+        }
+
+
 
         /*var formId = $form.attr("id") || "form" + Math.floor(Math.random() * 10000000);
         var data = parameters.data || [];
