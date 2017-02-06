@@ -30,7 +30,7 @@ grid_res.save()
 deterministic = Parameter(package=turbulence_p, label='Deterministic', name='deterministic', type=Parameter.CHECKBOX, required=True, display_order=4, default_value=True)
 deterministic.save()'''
 
-deterministic = Parameter.objects.get(name='deterministic')
+'''deterministic = Parameter.objects.get(name='deterministic')
 deterministic.label = None
 deterministic.save()
 
@@ -49,4 +49,19 @@ test_option2 = Option(parameter=test_parameter, value='orange', label='Oranges',
 test_option2.save()
 
 test_option3 = Option(parameter=test_parameter, value='mango', label='Mangoes', display_order=3)
-test_option3.save()
+test_option3.save()'''
+
+'''test_veggie = Parameter(package=turbulence_p, label='Pick a veggie', name='veggie', type=Parameter.SELECT, display_order=6)
+test_veggie.save()
+
+test_veggie1 = Option(parameter=test_veggie, label='Onion', value='onion', display_order=1)
+test_veggie1.save()
+
+test_veggie2 = Option(parameter=test_veggie, label='Potato', value='potato', display_order=2)
+test_veggie2.save()
+
+test_veggie3 = Option(parameter=test_veggie, label='Carrot', value='carrot', display_order=3, is_default=True)
+test_veggie3.save()'''
+
+test_file = Parameter(package=turbulence_p, label='Upload an Image', name='image', type=Parameter.FILE, help='Upload an image to be processed here.', file_accept='image/*', display_order=7)
+test_file.save()

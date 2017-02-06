@@ -2,6 +2,13 @@
 {%  load staticfiles %}
 
 {%  block content %}
+    <style type="text/css">
+        .label-help, .label-help:hover, .label-help:active, .label-help:visited {
+            margin-left: 5px;
+            color: #333;
+        }
+    </style>
+
     <script>
         var parameters = {{ parameter_json|safe }};
 
@@ -26,4 +33,5 @@
     </div>
 
     <script src="{% static "js/pages/run.js" %}"></script>
+    <script src="{% static "js/tooltip/activate-tooltips.js" %}"></script>
 {% endblock %}

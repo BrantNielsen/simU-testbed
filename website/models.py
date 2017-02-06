@@ -44,13 +44,16 @@ class Parameter(models.Model):
     type = models.CharField(max_length=3, choices=TYPE_CHOICES)
 
     required = models.BooleanField(default=False)
-    help = models.CharField(max_length=300, null=True, blank=True)
+    help = models.CharField(max_length=1000, null=True, blank=True)
     display_order = models.IntegerField()
 
     default_value = models.CharField(max_length=300, null=True, blank=True)
 
     min_value = models.FloatField(null=True)
     max_value = models.FloatField(null=True)
+    step_value = models.FloatField(null=True)
+
+    file_accept = models.CharField(max_length=100, null=True)
 
     @staticmethod
     def type_abbreviations():
@@ -72,7 +75,9 @@ class Parameter(models.Model):
             'display_order': self.display_order,
             'default_value': self.default_value,
             'min_value': self.min_value,
-            'max_value': self.max_value
+            'max_value': self.max_value,
+            'step_value': self.step_value,
+            'file_accept': self.file_accept
         }
 
 
